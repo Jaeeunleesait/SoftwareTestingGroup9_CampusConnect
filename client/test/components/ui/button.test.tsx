@@ -10,4 +10,5 @@ test("Calls onClick when Button is clicked", () => {
   fireEvent.click(button);
 
   expect(handleClick).toHaveBeenCalledTimes(1);
+  // expect(buttonElement).toBeInTheDocument();
 });

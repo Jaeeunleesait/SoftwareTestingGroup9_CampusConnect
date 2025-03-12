@@ -30,6 +30,30 @@ body {
   font-display: swap;
 }
 
+/*  */
+@font-face {
+  font-family: 'Inter';
+  src: url('/src/app/assets/fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/src/app/assets/fonts/Inter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/src/app/assets/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/src/app/assets/fonts/Inter-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+/*  */
+
+
 
 /* Overall Toast Container */
 .custom-toast {
