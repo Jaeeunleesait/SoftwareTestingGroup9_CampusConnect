@@ -51,6 +51,17 @@ app.get('/', (req, res) => {
   res.send('Hello from the server!');
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port http://localhost:${PORT}`);
-})
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port http://localhost:${PORT}`);
+// })
+
+// Only start the server if this file is the main module
+// This prevents the server from starting during tests
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port http://localhost:${PORT}`);
+  });
+}
+
+export { app };
+
