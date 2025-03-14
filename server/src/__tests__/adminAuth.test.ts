@@ -39,7 +39,7 @@ jest.mock('../config/prismaClient', () => ({
 
 describe('Admin Login', () => {
   beforeEach(() => {
-    jest.clearAllMocks(); // Clear all mocks before each test
+    jest.clearAllMocks();                                               // clears all mocks before each test
   });
 
   it('should log in admin with valid credentials', async () => {
@@ -50,8 +50,8 @@ describe('Admin Login', () => {
       picture: 'https://example.com/profile.jpg',
     });
     
-    // Mock Firebase Admin getUser
-    const mockGetUser = jest.fn().mockResolvedValue({
+// TC-001: Admin Login with valid credentials                  
+    const mockGetUser = jest.fn().mockResolvedValue({                  // Mock Firebase Admin getUser
       uid: '123',
       customClaims: null,
     });
@@ -87,7 +87,7 @@ describe('Admin Login', () => {
     // Mock Prisma Admin findUnique
     (prisma.admin.findUnique as jest.Mock).mockResolvedValue({
       user_id: '123',
-      permissions: ['read', 'write'],
+      permissions: ['Read-Write', 'Full Access'],
     });
     
     // Mock Prisma User update for setUserImage
@@ -100,7 +100,6 @@ describe('Admin Login', () => {
       image_url: 'https://example.com/profile.jpg',
     });
 
-    // Simulate a valid admin login request
     const response = await request(app)
       .post('/api/auth/login-admin')
       .set('Authorization', 'Bearer valid-token')
@@ -111,10 +110,10 @@ describe('Admin Login', () => {
     expect(mockGetUser).toHaveBeenCalledWith('123');
     expect(mockSetCustomUserClaims).toHaveBeenCalledWith('123', {
       role: 'Admin',
-      permissions: ['read', 'write'],
+      permissions: ['Read-Write', 'Full Access'],
     });
     expect(mockCreateSessionCookie).toHaveBeenCalledWith('valid-token', {
-      expiresIn: 604800000, // 7 days in milliseconds
+      expiresIn: 604800000,                                 // 7 days in milliseconds
     });
 
     // Assertions on response
@@ -129,7 +128,7 @@ describe('Admin Login', () => {
       role: 'Admin',
       first_name: 'John',
       last_name: 'Doe',
-      permission: ['read', 'write'],
+      permission: ['Read-Write', 'Full Access'],
     });
     expect(response.headers['set-cookie']).toBeDefined(); // Check if session cookie is set
   });
@@ -149,13 +148,13 @@ describe('Admin Login', () => {
       createSessionCookie: jest.fn(),
     });
 
-    // Mock Prisma User findUnique for non-admin user
+//TC-003: Admin Login with Invalid permissions     // Mock Prisma User findUnique for non-admin user  </permissions>
     (prisma.user.findUnique as jest.Mock).mockImplementation(({ where }) => {
       if (where.email === 'user@example.com') {
         return Promise.resolve({
           user_id: '456',
           email: 'user@example.com',
-          role: 'User', // Non-admin role
+          role: 'User',                  
           first_name: 'Jane',
           last_name: 'Smith',
         });
@@ -215,7 +214,8 @@ describe('Admin Login', () => {
     expect(response.body.message).toBe('Invalid request: id token not provided');
   });
   
-  it('should return 404 if user is not found', async () => {
+// TC-002: Admin Login: user logs in with invalid credentials (email)
+  it('should return 404 if user is not found', async () => {      
     // Mock Firebase Admin verifyIdToken
     const mockVerifyIdToken = jest.fn().mockResolvedValue({
       uid: '789',
@@ -243,5 +243,31 @@ describe('Admin Login', () => {
     expect(response.statusCode).toBe(404);
     expect(response.body.status).toBe('error');
     expect(response.body.message).toBe('User not found. Please contact support');
+  });
+
+  it('should return 401 if invalid credentials are provided', async () => {
+    // Mock Firebase Admin verifyIdToken to reject invalid token
+    const mockVerifyIdToken = jest.fn().mockRejectedValue(
+      new Error('Invalid token')
+    );
+
+    // Set up the mocked function
+    (firebaseAdmin.auth as jest.Mock).mockReturnValue({
+      verifyIdToken: mockVerifyIdToken,
+      getUser: jest.fn(),
+      setCustomUserClaims: jest.fn(),
+      createSessionCookie: jest.fn(),
+    });
+
+    // Simulate a login request with invalid credentials
+    const response = await request(app)
+      .post('/api/auth/login-admin')
+      .set('Authorization', 'Bearer invalid-token')
+      .send({});
+
+    // Assertions
+    expect(response.statusCode).toBe(401);
+    expect(response.body.status).toBe('error');
+    expect(response.body.message).toBe('Invalid token');
   });
 });
