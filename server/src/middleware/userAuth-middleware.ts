@@ -142,8 +142,7 @@ export const setUserImage = async (req: AuthenticatedRequest, res: Response, nex
 
 // session request route: verify session cookie and set user object in request
 export const verifySession = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    try {
-            
+    try {     
         initializeFirebaseAdmin(); 
 
         const sessionCookie = req.cookies['session'];
@@ -160,8 +159,12 @@ export const verifySession = async (req: AuthenticatedRequest, res: Response, ne
         next();        
         
     } catch (error: any) {
-        console.error("Error verifying session:", error);
-        res.status(403).json({ status: 'error', message: 'Unauthorized', error: error.message });
+        if (error.code === 'auth/session-cookie-revoked') {
+            res.status(403).json({ status: 'error', message: 'Unauthorized: Session has been revoked' });
+        } else {
+            res.status(403).json({ status: 'error', message: 'Unauthorized', error: error.message });
+        }
         return;
     }
 }
+

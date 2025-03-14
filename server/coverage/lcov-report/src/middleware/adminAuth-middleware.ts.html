@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.67% </span>
+                <span class="strong">78.31% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>57/83</span>
+                <span class='fraction'>65/83</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.75% </span>
+                <span class="strong">75.34% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>48/73</span>
+                <span class='fraction'>55/73</span>
             </div>
         
             
@@ -234,9 +234,9 @@
 <a name='L169'></a><a href='#L169'>169</a>
 <a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -280,7 +280,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -321,7 +321,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,7 +351,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -381,20 +381,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -550,20 +550,20 @@ export const setUserImage = async (req: AuthenticatedRequest, res: Response, nex
 &nbsp;
 &nbsp;
 // session request route: verify session cookie and set user object in request
-export const verifySession = <span class="fstat-no" title="function not covered" >async (r</span>eq: AuthenticatedRequest, res: Response, next: NextFunction) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        initializeFirebaseAdmin(); </span>
-        const sessionCookie = <span class="cstat-no" title="statement not covered" >req.cookies['session'];</span>
+export const verifySession = async (req: AuthenticatedRequest, res: Response, next: NextFunction) =&gt; {
+    try {
+        initializeFirebaseAdmin(); 
+        const sessionCookie = req.cookies['session'];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if (!sessionCookie) {</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!sessionCookie) {
 <span class="cstat-no" title="statement not covered" >            res.status(403).json({ status: 'error', message: 'Unauthorized: Session cookie is missing' });</span>
             //redirect to login page
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
-        const decodedToken = <span class="cstat-no" title="statement not covered" >await admin.auth().verifySessionCookie(sessionCookie, true);</span>
-<span class="cstat-no" title="statement not covered" >        req.user = { decodedToken: decodedToken };      </span>
-<span class="cstat-no" title="statement not covered" >        next();        </span>
+        const decodedToken = await admin.auth().verifySessionCookie(sessionCookie, true);
+        req.user = { decodedToken: decodedToken };      
+        next();        
         
     } catch (error: any) {
 <span class="cstat-no" title="statement not covered" >        console.error("Error verifying session:", error);</span>
@@ -577,7 +577,7 @@ export const verifySession = <span class="fstat-no" title="function not covered"
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-14T17:40:31.058Z
+                at 2025-03-14T19:58:31.089Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
