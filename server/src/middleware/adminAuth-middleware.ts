@@ -34,6 +34,11 @@ export const protectRoute = async (req: AuthenticatedRequest, res: Response, nex
         req.user = { decodedToken: decodedToken };                             
         next();
     } catch (error: any) {
+        if (error.message === 'Invalid token') {
+            res.status(401).json({ status: 'error', message: 'Invalid token' });
+            return;
+        }
+
         res.status(500).json({ status: 'error', message: 'Internal Server Error', error: error.message });
         return;
         // return res.redirect(`${process.env.CLIENT_ORIGIN}/admin/login`);
