@@ -209,7 +209,7 @@ export const getArticleById = async (req: Request, res: Response) => {
     
 // POST /api/articles/ - Create a new article
 export const createArticle = async (req: AuthenticatedRequest, res: Response) => {
-    console.log('Request payload size:', JSON.stringify(req.body).length);
+    // console.log('Request payload size:', JSON.stringify(req.body).length);
 
     try {
         // const { title, content, imageUrl, audience, status, type, author } = req.body;
