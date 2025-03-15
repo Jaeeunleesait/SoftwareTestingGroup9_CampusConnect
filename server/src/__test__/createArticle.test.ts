@@ -50,11 +50,12 @@ describe('SQL Injection Test for createArticle', () => {
     };
   });
 
+  //TC-015: SQL Injection Test for createArticle
   it('should safely handle SQL injection attempt in createArticle', async () => {
     const maliciousInput = "'; DROP TABLE Article; --";
 
     req.body = {
-      title: maliciousInput, // Inject malicious SQL into the title
+      title: maliciousInput,                     
       content: 'This is a test article content.',
       imageUrl: 'https://example.com/image.jpg',
       audience: 'Public',

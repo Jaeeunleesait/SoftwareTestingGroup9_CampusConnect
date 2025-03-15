@@ -67,7 +67,7 @@ describe('SQL Injection Test for getArticleCountsByType', () => {
     };
   });
 
-    // TC-017: SQL Injection Test for getArticleCountsByType
+    // TC-016: SQL Injection Test for getArticleCountsByType
   it('should prevent SQL injection in getArticleCountsByType', async () => {
     await getArticleCountsByType(req as Request, res as Response);
         expect(res.status).toHaveBeenCalledWith(200); 
@@ -101,7 +101,7 @@ describe('SQL Injection Test for getArticleCountsByType', () => {
     );
   });
 
-// TC-018: SQL Injection Test for getArticleCountsByType
+// TC-017: SQL Injection Test for getArticleCountsByType
   it('should safely handle malicious input in raw query', async () => {
     const maliciousInput = "'; DROP TABLE Article; --";
 
