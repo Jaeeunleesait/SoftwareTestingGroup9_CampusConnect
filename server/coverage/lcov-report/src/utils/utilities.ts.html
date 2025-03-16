@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/routes/user-route.ts</title>
+    <title>Code coverage report for src/utils/utilities.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/routes</a> user-route.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/utils</a> utilities.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,21 +32,21 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -88,75 +88,57 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
-import { getAllUsers, getUserById, getMyUser, createUser, updateUser, deleteUser } from '../controllers/user-controller';
-import { verifySession, adminRoute, validatePermissions } from '../middleware/user-middleware';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Utility Functions
 &nbsp;
-&nbsp;
-const router = express.Router();
-&nbsp;
-&nbsp;
-// GET /api/users/ - Get all users
-router.get('/', verifySession, adminRoute, validatePermissions(['Read-Only', 'Read-Write', 'Full Access']), getAllUsers);
-&nbsp;
-// GET /api/users/:id - Get a single user by ID
-router.get('/:id', verifySession, adminRoute, validatePermissions(['Read-Write', 'Full Access']), getUserById);
-    
-// GET /api/users/me - Get current user
-router.get('/me', verifySession, getMyUser);
-&nbsp;
-// POST: /api/users/ - Create a new user
-router.post('/', verifySession, adminRoute, validatePermissions(['Read-Write', 'Full Access']), createUser);
-&nbsp;
-// PATCH /api/users/:id - Update a user by ID. This is a partial update
-// router.patch('/:id', verifySession, validatePermissions, updateUser);
-&nbsp;
-// PUT /api/users/:id - Update a user by ID. This is a full update
-router.put('/:id', verifySession, adminRoute, validatePermissions(['Full Access']), updateUser);
-&nbsp;
-// DELETE /api/users/:id - Delete a user by ID
-router.delete('/:id', verifySession, adminRoute, validatePermissions(['Full Access']), deleteUser);
-&nbsp;
-&nbsp;
-// module.exports = router;
-export default router;</pre></td></tr></table></pre>
+// Truncates a given text if it exceeds the specified maxLength and appends "..."
+export function truncateText(text: string, maxLength: number): string {
+    if (text.length &lt;= maxLength) return text;
+    return text.slice(0, maxLength) + "...";
+  }
+  
+  
+  // Capitalizes the first letter of a given string.
+  export function capitalizeFirstLetter(text: string): string {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+  
+  
+  // Filters an array of strings based on a query (case insensitive).
+  export function filterItems(items: string[], query: string): string[] {
+    return items.filter(item =&gt; item.toLowerCase().includes(query.toLowerCase()));
+  }
+  
+  
+  // Calculates the sum of two numbers.
+  export function sum(a: number, b: number): number {
+    return a + b;
+  }
+  </pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
